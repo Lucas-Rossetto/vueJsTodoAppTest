@@ -1,0 +1,26 @@
+[
+  {
+    "name": "components-todoCreate",
+    "path": "/components/todoCreate",
+    "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\components\\\\todoCreate.vue",
+    "chunkName": "pages/components/todoCreate"
+  },
+  {
+    "name": "components-todoitem",
+    "path": "/components/todoitem",
+    "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\components\\\\todoitem.vue",
+    "chunkName": "pages/components/todoitem"
+  },
+  {
+    "name": "components-todoList",
+    "path": "/components/todoList",
+    "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\components\\\\todoList.vue",
+    "chunkName": "pages/components/todoList"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
