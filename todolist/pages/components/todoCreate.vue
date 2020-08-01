@@ -2,12 +2,12 @@
     <div class="marge">
         <v-btn v-on:click="addTodo()">Add Todo</v-btn>
         <br>
-            <div v-for="(todo,index) in todos">
+            <div v-for="(todo,index) in todos" :key=index>
                 <v-card class="marge">
                     <v-row class="marge">
                         <v-col cols="12" md="4" sm="6">
                             <v-textarea label="Titre" filled type="text" v-model="todo.title" />
-                            <label>{{todo.date}}</label>
+                            <label>{{todo.date | convertDate}}</label>
                         </v-col>
                         <v-col cols="12" md="6" sm="6"> 
                             <v-textarea label="Description" filled  type="text" v-model="todo.description" />
@@ -41,25 +41,32 @@ export default {
             deep : true
         },
     },
-    beforeCreate(){
-        if (localStorage.getItem('todos')) {
-            try {
-                this.todos = JSON.parse(localStorage.getItem('todos'));
-            } catch(e){
-                localStorage.removeItem('todos');
-            }
-        } else 
-            this.todos = [];
-        this.todosCopy = [...this.todos];
+    /* modifier une donnée à l'affichage */
+    filters : {
+        convertDate : function(date){
+            let objDate = new Date(date)
+            return objDate.toString();
+        }
+    },
+    mounted(){
+        if(localStorage.todos)
+            this.todos = JSON.parse(localStorage.todos)
+        else 
+            this.todos = []
+
+        /* fonction map pour itérer sur les valeurs du tableau - x correspond à l'élément du tableau , "=>" applique la modification    
+           {...x} permet de copier les références des objets du tableau */
+           
+        this.todosCopy = this.todos.map(x => ({...x}));
     },
     methods: {
         addTodo(){
             this.todos.push({
                 title: '',
                 description: '',
-                date : ''
+                date : Date.now()
             })
-            this.todosCopy = [...this.todos]
+        this.updateLocalStorage(); 
         },
         getTodoIDchanged(){
             for(let index in this.todos){
@@ -73,20 +80,20 @@ export default {
         },
         saveTodos(){
             let indexChanged = this.getTodoIDchanged();
-            console.log(indexChanged)
-            console.log(this.todos)
-            console.log(this.todosCopy)
-
             if(typeof indexChanged !== "undefined"){
-                this.$set(this.todos[indexChanged],"date", new Date());
-                let parsed = JSON.stringify(this.todos);
-                localStorage.setItem('todos', parsed);
-                this.todosCopy = [...this.todos]
+                console.log("update")
+                this.$set(this.todos[indexChanged],"date", Date.now());
+                this.updateLocalStorage();
             }
+        },
+        updateLocalStorage() {
+            let parsed = JSON.stringify(this.todos);
+            localStorage.setItem('todos', parsed);
+            this.todosCopy = this.todos.map(x => ({...x}));  
         },
         deleteTodo(index){
             this.todos.splice(index,1)
-            this.todosCopy = [...this.todos]
+            this.updateLocalStorage();  
         },
     },
 }
