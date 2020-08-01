@@ -1,7 +1,8 @@
 {
   "name": "todolist",
   "scripts": {
-    "dev": "nuxt"
+    "dev": "nuxt",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "node-localstorage": "^2.1.6",
