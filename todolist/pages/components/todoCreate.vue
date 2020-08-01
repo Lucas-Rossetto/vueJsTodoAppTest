@@ -1,24 +1,30 @@
 <template>
-    <div>
-        <button v-on:click="addTodo()">Add Todo</button>
-     <div v-for="(todo,index) in todos">
-        <div>
-          <label>titre</label>
-          <input type="text" v-model="todo.title" />
-        </div>
-        <div>
-          <label>description</label>
-          <input type="text" v-model="todo.description" />
-        </div>
-        <div>
-          <label>{{date}}</label>
-        </div>
-            <button @click="deleteTodo(index)">Remove todo</button>
-        </div>
-     </div>
-   </div>
+    <div class="marge">
+        <v-btn v-on:click="addTodo()">Add Todo</v-btn>
+        <br>
+            <div v-for="(todo,index) in todos">
+                <v-card class="marge">
+                    <v-row class="marge">
+                        <v-col cols="12" md="4" sm="6">
+                            <v-textarea label="Titre" filled type="text" v-model="todo.title" />
+                            <label>{{date}}</label>
+                        </v-col>
+                        <v-col cols="12" md="6" sm="6"> 
+                            <v-textarea label="Description" filled  type="text" v-model="todo.description" />
+                        </v-col>  
+                        <v-col cols="12" md="2" sm="6">
+                            <v-btn small color="error" @click="deleteTodo(index)">Remove todo</v-btn>
+                        </v-col>               
+                    </v-row>
+                </v-card> 
+            </div>
+    </div>  
 </template>
-
+<style scoped>
+ .marge {
+     margin: 15px;
+ }
+</style>
 <script>
 export default {
     data() {
@@ -33,15 +39,14 @@ export default {
     watch : {
         todos : {
             handler: function(value){
-                localStorage.setItem('todos', JSON.stringify(this.todos));
+                
                 this.todosCopy =  [...this.todos];
-                for(let key in value){
+                localStorage.setItem('todos', JSON.stringify(this.todos));
+                /*for(let key in value){
                     console.log(value[key].title)
                     console.log(this.todosCopy[key].title);
-                    if(value[key] !== this.todosCopy[key]){
+                    if(value[key] === this.todosCopy[key]){*/
                         this.date = new Date()
-                    }
-                }
             },
             deep : true
         },
@@ -52,7 +57,7 @@ export default {
             try {
                 this.todos = JSON.parse(localStorage.getItem('todos'));
             } catch(e){
-                localStorage.deleteTodo('todos');
+                localStorage.removeItem('todos');
             }
         }
     },
@@ -69,7 +74,6 @@ export default {
         },
         deleteTodo(index){
             this.todos.splice(index,1)
-            this.saveTodos();
         },
     }
 
