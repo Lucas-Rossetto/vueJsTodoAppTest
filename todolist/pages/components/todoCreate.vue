@@ -66,8 +66,9 @@ export default {
                 title: '',
                 description: '',
                 date : Date.now()
-            })
-        this.updateLocalStorage(); 
+            }) 
+            this.todosCopy = this.todos.map(x => ({...x}));
+            this.updateLocalStorage()
         },
         // fonction qui permet de comparer les valeurs de la todosCopy et de todos
         getTodoIDchanged(){
@@ -85,19 +86,19 @@ export default {
             let indexChanged = this.getTodoIDchanged();
             if(typeof indexChanged !== "undefined"){
                 this.$set(this.todos[indexChanged],"date", Date.now());
-                this.updateLocalStorage();
+                this.updateLocalStorage()
             }
         },
         // met à jour le localStorage
         updateLocalStorage() {
             let parsed = JSON.stringify(this.todos);
             localStorage.setItem('todos', parsed);
-            this.todosCopy = this.todos.map(x => ({...x}));  
         },
         // supprime une todo
         deleteTodo(index){
             this.todos.splice(index,1)
-            this.updateLocalStorage();  
+            this.todosCopy = this.todos.map(x => ({...x}));
+            this.updateLocalStorage() 
         },
     },
 }
