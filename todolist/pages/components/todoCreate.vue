@@ -56,10 +56,11 @@ export default {
 
         /* fonction map pour itérer sur les valeurs du tableau - x correspond à l'élément du tableau , "=>" applique la modification    
            {...x} permet de copier les références des objets du tableau */
-           
+
         this.todosCopy = this.todos.map(x => ({...x}));
     },
     methods: {
+        // ajoute une Todo
         addTodo(){
             this.todos.push({
                 title: '',
@@ -68,6 +69,7 @@ export default {
             })
         this.updateLocalStorage(); 
         },
+        // fonction qui permet de comparer les valeurs de la todosCopy et de todos
         getTodoIDchanged(){
             for(let index in this.todos){
                 let todo = this.todos[index];
@@ -78,19 +80,21 @@ export default {
                 }
             }
         },
+        // sauvegarde la Todo
         saveTodos(){
             let indexChanged = this.getTodoIDchanged();
             if(typeof indexChanged !== "undefined"){
-                console.log("update")
                 this.$set(this.todos[indexChanged],"date", Date.now());
                 this.updateLocalStorage();
             }
         },
+        // met à jour le localStorage
         updateLocalStorage() {
             let parsed = JSON.stringify(this.todos);
             localStorage.setItem('todos', parsed);
             this.todosCopy = this.todos.map(x => ({...x}));  
         },
+        // supprime une todo
         deleteTodo(index){
             this.todos.splice(index,1)
             this.updateLocalStorage();  
