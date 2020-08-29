@@ -33,6 +33,7 @@
 }
 </style>
 <script lang="ts">
+
 import {Component , Watch ,Vue } from 'vue-property-decorator';
 
 @Component({
@@ -52,7 +53,7 @@ export default class Todos extends Vue {
 
     @Watch('todos' , {deep:true})
     handler(value : string){
-      this.saveTodos() !== undefined;
+      this.saveTodos();
     }  
 
     mounted(){
@@ -111,5 +112,5 @@ export default class Todos extends Vue {
             this.updateLocalStorage()
         }
 
-    }
+    }    
 </script>

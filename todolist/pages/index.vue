@@ -1,26 +1,27 @@
-<template>
-<html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-<v-app>
-  <v-main>
-  <div id="todo">
-    <CreateTodo v-on:create-todo="addTodo()"/>
-  </div>
-  </v-main>
-</v-app> 
-</html> 
-</template>
+<script lang="ts">
 
-<script>
-
-import CreateTodo from "./components/todoCreate";
+'use strict';
+import Todos  from "./components/todoCreate.vue";
+import Vue , {VNode} from 'vue';
 
 export default {
   name : 'Todo',
   components: {
-    CreateTodo
+    Todos
   },
+  head() {
+      return {
+        meta: [{
+          name: "viewport",
+          content: "width=device-width",
+          }]
+      }
+  },
+  render (createElement) : VNode {
+    const todos = createElement('Todos');
+    const vMain = createElement('v-main' , [todos])
+    return createElement('v-app' , [vMain]);
+  }
+
 };
 </script>
