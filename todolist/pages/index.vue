@@ -14,17 +14,13 @@
 </template>
 
 <script>
+
 import CreateTodo from "./components/todoCreate";
 
 export default {
   name : 'Todo',
   components: {
     CreateTodo
-  },
-  data() {
-    return {
-      
-    };
   },
 };
 </script>

@@ -10,6 +10,7 @@ export default {
     },
     buildModules: [
         // Simple usage
+        '@nuxt/typescript-build',
         '@nuxtjs/vuetify',
     ]
 }
