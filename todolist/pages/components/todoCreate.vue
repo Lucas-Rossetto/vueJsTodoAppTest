@@ -34,7 +34,7 @@
 </style>
 <script lang="ts">
 "use strict";
-import { Component, Watch, Vue } from "vue-property-decorator";
+import { Watch, Vue } from "vue-property-decorator";
 import { VNode } from "vue";
 import { CreateElement } from "vue/types/umd";
 
@@ -47,7 +47,7 @@ interface Todo {
 interface TodosCopy {
   title: string;
   description: string;
-  date: number;
+  date: number; 
 }
 
 export default class Todos extends Vue {
