@@ -34,7 +34,7 @@
 </style>
 <script lang="ts">
 "use strict";
-import { Watch, Vue } from "vue-property-decorator";
+import { Component, Watch, Vue } from "vue-property-decorator";
 import { VNode } from "vue";
 import { CreateElement } from "vue/types/umd";
 
@@ -50,9 +50,10 @@ interface TodosCopy {
   date: number; 
 }
 
+@Component
 export default class Todos extends Vue {
-  todos: Todo[] = [];
-  todosCopy: TodosCopy[] = [];
+  private todos: Todo[] = [];
+  private todosCopy: TodosCopy[] = [];
 
   render(createElement: CreateElement): VNode {
     const self = this;
@@ -159,7 +160,7 @@ export default class Todos extends Vue {
                           color: "error",
                         },
                         on: {
-                          click : self.deleteTodo
+                          click : () => self.deleteTodo(index)
                         },
                       },
                       "Remove Todo"

@@ -1,6 +1,6 @@
 <script lang="ts">
 
-'use strict';
+"use strict";
 import Todos from "./components/todoCreate.vue";
 import Vue , {VNode} from 'vue';
 import { CreateElement } from 'vue/types/umd';
