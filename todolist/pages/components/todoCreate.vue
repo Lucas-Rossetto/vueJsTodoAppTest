@@ -215,13 +215,11 @@ export default class Todos extends Vue {
   getTodoIDchanged(): string | undefined {
     for (let index in this.todos) {
       let todo = this.todos[index];
-      for (let indexTodo in todo) {
-        if (todo[indexTodo] !== this.todosCopy[index][indexTodo]) {
+        if (todo.title !== this.todosCopy[index].title || todo.description !== this.todosCopy[index].description) {
           return index;
         }
       }
     }
-  }
 
   // sauvegarde la Todo
   saveTodos(): void {

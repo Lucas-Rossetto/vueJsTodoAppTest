@@ -3,14 +3,12 @@
     "name": "components-todoCreate",
     "path": "/components/todoCreate",
     "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\components\\\\todoCreate.vue",
-    "chunkName": "pages/components/todoCreate",
-    "_name": "_515e2aed"
+    "chunkName": "pages/components/todoCreate"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\Lucas\\\\Desktop\\\\ProjetNuxtJs\\\\todolist\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_93ba6a26"
+    "chunkName": "pages/index"
   }
 ]
