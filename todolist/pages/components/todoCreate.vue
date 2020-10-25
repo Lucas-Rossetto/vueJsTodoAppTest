@@ -1,39 +1,9 @@
-<!--template>
-  <div class="marge">
-    <v-btn v-on:click="addTodo()">Add Todo</v-btn>
-    <br />
-    <div v-for="(todo, index) in todos" :key="index">
-      <v-card class="marge">
-        <v-row class="marge">
-          <v-col cols="12" md="4" sm="6">
-            <v-textarea label="Titre" filled type="text" v-model="todo.title" />
-            <label>{{ todo.date | convertDate }}</label>
-          </v-col>
-          <v-col cols="12" md="6" sm="6">
-            <v-textarea
-              label="Description"
-              filled
-              type="text"
-              v-model="todo.description"
-            />
-          </v-col>
-          <v-col cols="12" md="2" sm="6">
-            <v-btn small color="error" @click="deleteTodo(index)"
-              >Remove todo</v-btn
-            >
-          </v-col>
-        </v-row>
-      </v-card>
-    </div>
-  </div>
-</template-->
 <style scoped>
 .marge {
   margin: 15px;
 }
 </style>
 <script lang="ts">
-"use strict";
 import { Component, Watch, Vue } from "vue-property-decorator";
 import { VNode } from "vue";
 import { CreateElement } from "vue/types/umd";
@@ -47,20 +17,20 @@ interface Todo {
 interface TodosCopy {
   title: string;
   description: string;
-  date: number; 
+  date: number;
 }
 
-@Component
+@Component({})
 export default class Todos extends Vue {
   private todos: Todo[] = [];
   private todosCopy: TodosCopy[] = [];
 
   render(createElement: CreateElement): VNode {
     const self = this;
-    const convertDate = function(num : number) {
-        const objDate = new Date(num);
-        return objDate.toString();
-    }
+    const convertDate = function(num: number) {
+      const objDate = new Date(num);
+      return objDate.toString();
+    };
 
     const buttonAdd = createElement(
       "v-btn",
@@ -160,7 +130,7 @@ export default class Todos extends Vue {
                           color: "error",
                         },
                         on: {
-                          click : () => self.deleteTodo(index)
+                          click: () => self.deleteTodo(index),
                         },
                       },
                       "Remove Todo"
@@ -215,11 +185,14 @@ export default class Todos extends Vue {
   getTodoIDchanged(): string | undefined {
     for (let index in this.todos) {
       let todo = this.todos[index];
-        if (todo.title !== this.todosCopy[index].title || todo.description !== this.todosCopy[index].description) {
-          return index;
-        }
+      if (
+        todo.title !== this.todosCopy[index].title ||
+        todo.description !== this.todosCopy[index].description
+      ) {
+        return index;
       }
     }
+  }
 
   // sauvegarde la Todo
   saveTodos(): void {
